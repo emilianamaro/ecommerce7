@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="main.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="userId" data-bs-toggle="dropdown"
+                aria-expanded="false">
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="cart.html" onclick="setCartId(25801)">Mi carrito</a></li>
+                <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+                <li><a class="dropdown-item" href="index.html" onclick="signOff()">Cerrar sesión</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="container">
+      <br><br>
+      <div class="row justify-content-between">
+        <h1 class="mb-1 p-4 col-4" id="productName"></h1>
+        <button type="button" class="btn btn-primary btn-lg col-2" data-bs-toggle="modal"
+          data-bs-target="#modalCompra"><b>Comprar</b></button>
+      </div>
+      <hr><br>
+      <div>
+        <h3><b>Precio</b></h3>
+        <h4 class="mb-1" id="productCost"></h4>
+      </div><br>
+      <div>
+        <h3><b>Descripción</b></h3>
+        <h4 class="mb-1" id="productDescription"></h4>
+      </div><br>
+      <div>
+        <h3><b>Categoría</b></h3>
+        <h4 class="mb-1" id="productCategory"></h4>
+      </div><br>
+      <div>
+        <h3><b>Cantidad de vendidos</b></h3>
+        <h4 class="mb-1" id="productSold"></h4>
+      </div><br>
+      <div>
+        <h3><b>Imágenes ilustrativas</b></h3>
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner" id="carousel">
+          </div>
+        </div>
+      </div>
+      <div><br><br>
+        <h3><b>Comentarios</b></h3>
+        <ul class="list-group" id="comments"></ul>
+      </div><br>
+      <div>
+        <div class="row">
+          <div class="col"><br>
+            <div id="container">
+            </div>
+            <div>
+              <h3><b>Comentar</b></h3>
+              <h4 class="mb-1">Tu opinión:</h4>
+              <textarea name="comment" rows="5" cols="80" id="textComment"></textarea>
+              <h4 class="mb-1">Tu puntuación:</h4>
+              <select name="score" id="score">
+                <option value="select" autofocus>Seleccione su puntuación</option>
+                <option value="one">1 (más baja)</option>
+                <option value="two">2</option>
+                <option value="three">3</option>
+                <option value="four">4</option>
+                <option value="five">5 (más alta)</option>
+              </select> <br>
+              <button class="btn btn-primary btn-lg" type="submit" onclick="postComment()">Enviar</button>
+              <div class="d-none" id="alertDiv">
+              </div>
+              <div class="modal fade" id="modalCompra" tabindex="-1" aria-labelledby="modalCompra"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-center">
+                      <h5 class="modal-title" id="exampleModalLabel">¿Cuántos artículos desea comprar?</h5>
+                    </div>
+                    <div class="modal-body d-flex justify-content-center">
+                      <input type="number" id="inputNumber" oninput="countModal()" min="1">
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="cancel()">Cancelar</button>
+                      <button type="button" class="btn btn-primary" id="modalBtnComprar" data-bs-dismiss="modal" onclick="comprar()" disabled>Comprar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div> <br>
+            <div>
+              <h3><b>Productos relacionados</b></h3> <br>
+              <div class="row" id="relatedProducts">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
+        2022</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/product-info.js"></script>
+</body>
+
+</html>
